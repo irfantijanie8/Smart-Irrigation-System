@@ -143,6 +143,10 @@ void loop() {
     payload = JSON.stringify(payloadObject);  
     client.publish("esp32/sensor", payload);
 
+    if(_moisture > 60 & pump_state){
+      client.publish("esp32/pump", "off");
+    }
+
     bool rain_read = is_raining();
     if(rain_read & pump_state)
       client.publish("esp32/pump", "off");

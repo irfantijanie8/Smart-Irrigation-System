@@ -36,6 +36,10 @@ def on_message(client, userdata, message):
         # Output the prediction
         rain_prediction = "Yes" if prediction[0] else "No"
         print(f"Prediction: Will it rain tomorrow? {rain_prediction}")
+        if prediction[0]:
+            msg = "on"
+            client.publish("esp32/pump", msg)
+
 
 
     # Wait for some time before reading new data
